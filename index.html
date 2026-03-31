@@ -206,6 +206,210 @@
   footer a { color: var(--gold); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+
+  /* LIGHT MODE */
+  body.light {
+    --bg: #f0f4f8;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --card-hover: #f8fafc;
+    --border: #cbd5e1;
+    --text: #0f172a;
+    --muted: #64748b;
+  }
+  body.light .hero {
+    background: radial-gradient(ellipse at top, #dbeafe 0%, #f0f4f8 70%);
+  }
+  body.light .hero-grid {
+    background-image:
+      linear-gradient(rgba(99,132,201,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,132,201,0.15) 1px, transparent 1px);
+  }
+  body.light .hero h1, body.light .hero-name-ar {
+    background: linear-gradient(135deg, #0f172a 30%, #d97706);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  body.light .link-card { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  body.light .stat-card { box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  body.light .social-btn { background: #fff; }
+  body, .hero, .link-card, .stat-card, .social-btn, .sec-head, footer {
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  /* SCROLL TO TOP */
+  #scrollTop {
+    position: fixed; bottom: 28px; left: 28px; z-index: 999;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--gold);
+    color: #0a0f1e;
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+    opacity: 0; transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+  #scrollTop.visible { opacity: 1; transform: translateY(0); }
+  #scrollTop:hover { transform: translateY(-4px) scale(1.08); box-shadow: 0 8px 28px rgba(245,158,11,0.5); }
+
+
+
+  /* PARTICLE CANVAS */
+  #particleCanvas {
+    position: absolute; inset: 0; z-index: 0;
+    pointer-events: none;
+  }
+  .hero > *:not(#particleCanvas) { position: relative; z-index: 1; }
+
+  /* HERO BANNER / COVER gradient overlay */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-banner {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      linear-gradient(135deg,
+        rgba(10,15,30,0.92) 0%,
+        rgba(15,42,80,0.85) 40%,
+        rgba(10,15,30,0.92) 100%);
+  }
+  body.light .hero-banner {
+    background: linear-gradient(135deg,
+      rgba(240,244,248,0.88) 0%,
+      rgba(219,234,254,0.82) 40%,
+      rgba(240,244,248,0.88) 100%);
+  }
+
+  /* STICKY NAVBAR */
+  #topNav {
+    position: sticky; top: 0; z-index: 998;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(30,58,95,0.6);
+    padding: 0 24px;
+    transition: background 0.35s;
+  }
+  body.light #topNav {
+    background: rgba(240,244,248,0.88);
+    border-bottom-color: rgba(203,213,225,0.8);
+  }
+  .nav-inner {
+    max-width: 780px; margin: 0 auto;
+    height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name {
+    font-size: 0.85rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  #themeToggleNav {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    cursor: pointer; font-size: 17px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s;
+  }
+  #themeToggleNav:hover { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); transform: rotate(20deg); }
+
+
+  /* PROGRESS BAR */
+  #readProgress {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), #f97316, var(--purple));
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.1s linear;
+  }
+
+  /* CARD ENTRANCE ANIMATION */
+  .link-card {
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .link-card.anim-init {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  .link-card.anim-init.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .link-card.coming { opacity: 0.5; }
+  .link-card.coming.anim-init.visible { opacity: 0.5 !important; }
+
+  /* SEARCH BAR */
+  .search-wrap {
+    max-width: 780px; margin: 0 auto 0;
+    padding: 24px 24px 0;
+    position: relative;
+  }
+  .search-wrap i {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 15px; pointer-events: none;
+    margin-top: 12px;
+  }
+  #searchInput {
+    width: 100%; padding: 13px 44px 13px 18px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; color: var(--text);
+    font-family: 'Cairo', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  #searchInput:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+  }
+  #searchInput::placeholder { color: var(--muted); }
+
+  /* COPY LINK TOAST */
+  #toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 22px; border-radius: 25px;
+    font-size: 0.82rem; font-weight: 600;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s ease; z-index: 9999;
+    white-space: nowrap;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* CATEGORY FILTER TABS */
+  .filter-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    max-width: 780px; margin: 16px auto 0;
+    padding: 0 24px;
+  }
+  .ftab {
+    padding: 6px 16px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
+    cursor: pointer; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted);
+    transition: all 0.25s; font-family: 'Cairo', sans-serif;
+  }
+  .ftab.active, .ftab:hover {
+    background: rgba(245,158,11,0.12);
+    border-color: rgba(245,158,11,0.4);
+    color: var(--gold);
+  }
+
+  /* STATS COUNTER ANIMATION */
+  .stat-num { transition: color 0.3s; }
+
+  /* CARD COPY BUTTON */
+  .copy-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 11px; padding: 2px 6px;
+    border-radius: 6px; transition: all 0.2s;
+    font-family: 'Cairo', sans-serif;
+  }
+  .copy-btn:hover { color: var(--gold); background: rgba(245,158,11,0.1); }
+
+  /* HIDE filtered cards */
+  .link-card.hidden { display: none !important; }
+
   @media(max-width:600px){
     .hero-name-ar{font-size:1.5rem;}
     .stats-grid{grid-template-columns:repeat(2,1fr);}
@@ -214,13 +418,51 @@
     .avatar{width:110px;height:110px;}
   }
 </style>
+
+<meta property="og:title" content="Mohamed Ahmed Elkasaby | منصات هندسية تعليمية"/>
+<meta property="og:description" content="مطور منصات هندسية تعليمية — اختبارات التربة والخرسانة والأسفلت | ASTM · ACI · DIN"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="https://Mohamed742406.github.io/elkasaby-hub/preview.jpg"/>
+<meta property="og:url" content="https://Mohamed742406.github.io/elkasaby-hub/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Mohamed Ahmed Elkasaby | منصات هندسية"/>
+<meta name="twitter:description" content="مطور منصات هندسية تعليمية — ASTM · ACI · DIN"/>
+<meta name="twitter:image" content="https://Mohamed742406.github.io/elkasaby-hub/preview.jpg"/>
+<meta name="description" content="منصات هندسية تعليمية — اختبارات التربة والخرسانة والأسفلت | Mohamed Ahmed Elkasaby"/>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 </head>
 <body>
 
 <!-- HERO -->
+
+<div id="readProgress"></div>
+
+<nav id="topNav">
+  <div class="nav-inner">
+    <span class="nav-name">Mohamed Elkasaby</span>
+    <div class="nav-actions">
+      <button id="themeToggleNav" title="تبديل الوضع" onclick="toggleTheme()">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<div id="toast">✅ تم نسخ الرابط!</div>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+
 <div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-banner"></div>
+  <canvas id="particleCanvas"></canvas>
 
   <div class="avatar-wrap">
     <div class="avatar-ring2"></div>
@@ -242,8 +484,11 @@
     <a href="https://github.com/Mohamed742406" target="_blank" class="social-btn">
       <i class="fab fa-github"></i> GitHub
     </a>
-    <a href="mailto:" class="social-btn">
-      <i class="fas fa-envelope"></i> تواصل
+    <a href="https://wa.me/966581295794" target="_blank" class="social-btn" style="color:#25d366;border-color:rgba(37,211,102,0.3);">
+      <i class="fab fa-whatsapp"></i> واتساب
+    </a>
+    <a href="mailto:elkasaby1988@gmail.com" class="social-btn">
+      <i class="fas fa-envelope"></i> elkasaby1988@gmail.com
     </a>
   </div>
 </div>
@@ -259,6 +504,20 @@
 </div>
 
 <!-- MAIN -->
+
+<div class="search-wrap">
+  <i class="fas fa-search"></i>
+  <input type="text" id="searchInput" placeholder="🔍  ابحث عن منصة أو مواصفة..." oninput="filterCards()"/>
+</div>
+<div class="filter-tabs">
+  <button class="ftab active" onclick="setFilter('all',this)">الكل</button>
+  <button class="ftab" onclick="setFilter('تربة',this)">🧪 تربة</button>
+  <button class="ftab" onclick="setFilter('خرسانة',this)">🏛️ خرسانة</button>
+  <button class="ftab" onclick="setFilter('أسفلت',this)">🛣️ أسفلت</button>
+  <button class="ftab" onclick="setFilter('تعليمي',this)">🎓 تعليمي</button>
+  <button class="ftab" onclick="setFilter('إدارة',this)">🔬 إدارة</button>
+</div>
+
 <div class="main">
 
   <!-- LIVE PLATFORMS -->
@@ -285,7 +544,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://mohamed742406.github.io/plate-load-test/" target="_blank"
+    <a data-tags="تربة اختبار حمل DIN" href="https://mohamed742406.github.io/plate-load-test/" target="_blank"
        class="link-card" style="--c:#3b82f6;">
       <div class="pnum">2</div>
       <div class="card-ico" style="background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.2);">⚖️</div>
@@ -298,7 +557,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://mohamed742406.github.io/soil-lab-platform/" target="_blank"
+    <a data-tags="تربة D6913 D4318 D1557" href="https://mohamed742406.github.io/soil-lab-platform/" target="_blank"
        class="link-card" style="--c:#10b981;">
       <div class="pnum">3</div>
       <div class="card-ico" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.2);">🧪</div>
@@ -311,7 +570,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://Mohamed742406.github.io/materials-lab/" target="_blank"
+    <a data-tags="خرسانة ACI صلاحية مواد" href="https://Mohamed742406.github.io/materials-lab/" target="_blank"
        class="link-card" style="--c:#8b5cf6;">
       <div class="pnum">4</div>
       <div class="card-ico" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.2);">🏛️</div>
@@ -324,7 +583,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://lab-quality-manager-p3v4.vercel.app/" target="_blank"
+    <a data-tags="إدارة ISO جودة" href="https://lab-quality-manager-p3v4.vercel.app/" target="_blank"
        class="link-card" style="--c:#06b6d4;">
       <div class="pnum">5</div>
       <div class="card-ico" style="background:rgba(6,182,212,0.1);border-color:rgba(6,182,212,0.2);">🔬</div>
@@ -337,7 +596,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://technical-lab-english.vercel.app/" target="_blank"
+    <a data-tags="تعليمي مصطلحات" href="https://technical-lab-english.vercel.app/" target="_blank"
        class="link-card" style="--c:#f59e0b;">
       <div class="pnum">6</div>
       <div class="card-ico" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);">🎓</div>
@@ -350,7 +609,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://field-speak-guide.vercel.app/" target="_blank"
+    <a data-tags="تعليمي ميداني" href="https://field-speak-guide.vercel.app/" target="_blank"
        class="link-card" style="--c:#10b981;">
       <div class="pnum">7</div>
       <div class="card-ico" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.2);">🏗️</div>
@@ -363,7 +622,7 @@
       <div class="card-right"><div class="dot dot-live"></div><i class="fas fa-arrow-left card-arrow"></i></div>
     </a>
 
-    <a href="https://astm-egyptian-guide.vercel.app/" target="_blank"
+    <a data-tags="تعليمي ASTM مبسط" href="https://astm-egyptian-guide.vercel.app/" target="_blank"
        class="link-card" style="--c:#3b82f6;">
       <div class="pnum">8</div>
       <div class="card-ico" style="background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.2);">📋</div>
@@ -455,6 +714,174 @@
     جميع المنصات مفتوحة المصدر · مصممة لخدمة المهندسين والفنيين العرب
   </p>
 </footer>
+
+
+<script>
+
+// ── Particle Animation
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COUNT = 55;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    W = canvas.width = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+
+  function isLight() { return document.body.classList.contains('light'); }
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.r = Math.random() * 2 + 0.5;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.alpha = Math.random() * 0.5 + 0.1;
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      const color = isLight() ? `rgba(30,80,160,${this.alpha})` : `rgba(245,158,11,${this.alpha})`;
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({length: COUNT}, () => new Particle());
+  }
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i+1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 100) {
+          const alpha = (1 - dist/100) * 0.15;
+          const color = isLight() ? `rgba(30,80,160,${alpha})` : `rgba(245,158,11,${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  loop();
+})();
+
+// ── Theme Toggle
+let isLight = localStorage.getItem('theme') === 'light';
+function applyTheme() {
+  document.body.classList.toggle('light', isLight);
+  const icon = isLight ? '☀️' : '🌙';
+  const navBtn = document.getElementById('themeToggleNav');
+  if (navBtn) navBtn.textContent = icon;
+}
+function toggleTheme() {
+  isLight = !isLight;
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  applyTheme();
+}
+applyTheme();
+
+// ── Scroll to Top button
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 300);
+  // Progress bar
+  const prog = document.getElementById('readProgress');
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  prog.style.transform = `scaleX(${Math.min(pct, 1)})`;
+});
+
+// ── Intersection Observer for card animations
+const allCards = document.querySelectorAll('.link-card');
+allCards.forEach(c => c.classList.add('anim-init'));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+allCards.forEach(c => observer.observe(c));
+// Fallback: show all after 1.5s in case observer fails
+setTimeout(() => allCards.forEach(c => c.classList.add('visible')), 1500);
+
+// ── Search filter
+let activeFilter = 'all';
+function filterCards() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.querySelectorAll('.link-card').forEach(card => {
+    const text = (card.innerText + ' ' + (card.dataset.tags || '')).toLowerCase();
+    const matchSearch = !q || text.includes(q);
+    const matchFilter = activeFilter === 'all' || text.includes(activeFilter);
+    card.classList.toggle('hidden', !(matchSearch && matchFilter));
+  });
+}
+function setFilter(val, btn) {
+  activeFilter = val;
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+
+// ── Copy link on right-click / long-press
+document.querySelectorAll('.link-card[href]').forEach(card => {
+  card.addEventListener('contextmenu', e => {
+    e.preventDefault();
+    navigator.clipboard.writeText(card.href).then(() => showToast());
+  });
+});
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Animated counters
+function animateCounter(el, target, suffix='') {
+  let start = 0;
+  const step = Math.ceil(target / 30);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target + suffix; clearInterval(timer); }
+    else el.textContent = start + suffix;
+  }, 40);
+}
+const nums = document.querySelectorAll('.stat-num');
+const targets = [8, 15, 4];
+const suffixes = ['', '+', ''];
+nums.forEach((el, i) => {
+  if (targets[i]) animateCounter(el, targets[i], suffixes[i]);
+});
+</script>
 
 </body>
 </html>
